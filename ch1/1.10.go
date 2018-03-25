@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"strconv"
 	"strings"
@@ -21,11 +22,11 @@ func main() {
 		fmt.Println("URL input is required as command line args")
 		os.Exit(1)
 	}
-	for i, url := range os.Args[1:] {
-		if !strings.HasPrefix(url, "http://") && !strings.HasPrefix(url, "https://") {
-			url = "http://" + url
+	for i, request_url := range os.Args[1:] {
+		if !strings.HasPrefix(request_url, "http://") && !strings.HasPrefix(request_url, "https://") {
+			request_url = "http://" + request_url
 		}
-		go fetch(i, url, ch)
+		go fetch(i, request_url, ch)
 	}
 
 	fmt.Printf("Time\tBytes\tStatus\tURL\n")
@@ -38,16 +39,22 @@ func main() {
 	fmt.Printf("Total Execution Time: %vs\n", xtime)
 }
 
-func fetch(index int, url string, ch chan<- string) {
+func fetch(index int, request_url string, ch chan<- string) {
 
-	start := time.Now()
-	response, err := http.Get(url)
+	u, err := url.Parse(request_url)
 	if err != nil {
-		ch <- fmt.Sprintf("Error fetching url %s: %v", url, err)
+		ch <- fmt.Sprintf("Error parsing url %s: %v", request_url, err)
 		return
 	}
 
-	file := "result_" + strconv.Itoa(index)
+	start := time.Now()
+	response, err := http.Get(request_url)
+	if err != nil {
+		ch <- fmt.Sprintf("Error fetching url %s: %v", request_url, err)
+		return
+	}
+
+	file := "Result_" + strconv.Itoa(index) + "_" + u.Hostname()
 	f, err := os.Create(file)
 	if err != nil {
 		ch <- fmt.Sprintf("Error creating file: %v", file, err)
@@ -58,9 +65,9 @@ func fetch(index int, url string, ch chan<- string) {
 	nbytes, err := io.Copy(f, response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		ch <- fmt.Sprintf("Error reading the response body: %v", url, err)
+		ch <- fmt.Sprintf("Error reading the response body: %v", request_url, err)
 		return
 	}
 	xtime := time.Since(start).Seconds()
-	ch <- fmt.Sprintf("%.2f\t%d\t%s\t#%d:%s", xtime, nbytes, response.Status, index, url)
+	ch <- fmt.Sprintf("%.2f\t%d\t%s\t#%d:%s", xtime, nbytes, response.Status, index, request_url)
 }
