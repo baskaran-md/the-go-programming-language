@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-    // os.Args[0] prints the command name
+	// os.Args[0] prints the command name
 	fmt.Printf("Program: %v\n", os.Args[0])
 	fmt.Printf("All Args: %v\n", strings.Join(os.Args[1:], ","))
 }

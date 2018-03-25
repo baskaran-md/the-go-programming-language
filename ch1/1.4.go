@@ -33,13 +33,13 @@ func main() {
 	}
 
 	// Output in Format#1
-    fmt.Printf("OUTPUT IN FORMAT-1:\n")
+	fmt.Printf("OUTPUT IN FORMAT-1:\n")
 	for line, count := range counts {
 		fmt.Printf("%d\t%s\n\t\t%v\n", count, line, file_map[line])
 	}
 
 	// Output in Format#2
-    fmt.Printf("\n\nOUTPUT IN FORMAT-2:\n")
+	fmt.Printf("\n\nOUTPUT IN FORMAT-2:\n")
 	for line, count := range counts {
 		fmt.Printf("%d\t%s\n", count, line)
 		for file, fc := range file_map[line] {

@@ -28,7 +28,7 @@ import (
 
 //!+main
 
-var palette = []color.Color{color.Black, color.RGBA{0x00 ,0xff ,0x00 , 0x01}}
+var palette = []color.Color{color.Black, color.RGBA{0x00, 0xff, 0x00, 0x01}}
 
 const (
 	blackIndex = 0 // first color in palette
