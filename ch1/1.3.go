@@ -1,5 +1,5 @@
 /*
-1.3 Echo Program that measures runtime
+1.3: Echo Program that measures runtime
 */
 package main
 

@@ -1,5 +1,5 @@
 /*
-1.2 Echo Program to print the index and value of each args
+1.2: Echo Program to print the index and value of each args
 */
 package main
 

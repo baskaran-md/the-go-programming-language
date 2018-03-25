@@ -1,5 +1,5 @@
 /*
-1.1 Echo Program to print the command that invoked it
+1.1: Echo Program to print the command that invoked it
 */
 package main
 

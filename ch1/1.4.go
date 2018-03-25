@@ -1,5 +1,5 @@
 /*
-1.4 Dup program to print all the files of duplicate lines
+1.4: Dup program to print all the files of duplicate lines
 */
 package main
 
