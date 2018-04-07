@@ -22,11 +22,11 @@ func main() {
 		fmt.Println("URL input is required as command line args")
 		os.Exit(1)
 	}
-	for i, request_url := range os.Args[1:] {
-		if !strings.HasPrefix(request_url, "http://") && !strings.HasPrefix(request_url, "https://") {
-			request_url = "http://" + request_url
+	for i, requestURL := range os.Args[1:] {
+		if !strings.HasPrefix(requestURL, "http://") && !strings.HasPrefix(requestURL, "https://") {
+			requestURL = "http://" + requestURL
 		}
-		go fetch(i, request_url, ch)
+		go fetch(i, requestURL, ch)
 	}
 
 	fmt.Printf("Time\tBytes\tStatus\tURL\n")
@@ -39,18 +39,18 @@ func main() {
 	fmt.Printf("Total Execution Time: %vs\n", xtime)
 }
 
-func fetch(index int, request_url string, ch chan<- string) {
+func fetch(index int, requestURL string, ch chan<- string) {
 
-	u, err := url.Parse(request_url)
+	u, err := url.Parse(requestURL)
 	if err != nil {
-		ch <- fmt.Sprintf("Error parsing url %s: %v", request_url, err)
+		ch <- fmt.Sprintf("Error parsing url %s: %v", requestURL, err)
 		return
 	}
 
 	start := time.Now()
-	response, err := http.Get(request_url)
+	response, err := http.Get(requestURL)
 	if err != nil {
-		ch <- fmt.Sprintf("Error fetching url %s: %v", request_url, err)
+		ch <- fmt.Sprintf("Error fetching url %s: %v", requestURL, err)
 		return
 	}
 
@@ -65,9 +65,9 @@ func fetch(index int, request_url string, ch chan<- string) {
 	nbytes, err := io.Copy(f, response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		ch <- fmt.Sprintf("Error reading the response body: %v", request_url, err)
+		ch <- fmt.Sprintf("Error reading the response body: %v", requestURL, err)
 		return
 	}
 	xtime := time.Since(start).Seconds()
-	ch <- fmt.Sprintf("%.2f\t%d\t%s\t#%d:%s", xtime, nbytes, response.Status, index, request_url)
+	ch <- fmt.Sprintf("%.2f\t%d\t%s\t#%d:%s", xtime, nbytes, response.Status, index, requestURL)
 }
