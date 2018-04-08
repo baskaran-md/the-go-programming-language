@@ -6,3 +6,4 @@ Exercise programs of the book
 The Go Programming Language (Addison-Wesley Professional Computing Series)
 by Alan A. A. Donovan (Author), Brian W. Kernighan  (Author)
 ```
+& few references on the golang concentps.
