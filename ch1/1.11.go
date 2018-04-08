@@ -1,6 +1,5 @@
 /*
-1.11: Fetch URL program to get the list from Alexa Top sites
-with options to writing response to file, limit number of URLs to fetch, and dry run against smaller set
+1.10: Fetch URL program with writing response to file
 */
 package main
 
@@ -23,6 +22,8 @@ const (
 
 	// SampleAlexaURL Sample URL containing few URLs for testing
 	SampleAlexaURL = "https://gist.githubusercontent.com/baskaran-md/0ca2b3b5dfce82d70f4d516ae439532b/raw/a0703a9940151c12e92fc5f3d5a372018ffb8258/majestic_million_sample.csv"
+	// Timeout in seconds for fetching the URL (client side timeout)
+	Timeout = 120
 )
 
 func main() {
@@ -104,7 +105,10 @@ func fetch(index int, requestURL string, ch chan<- string, exportToFile bool) {
 	}
 
 	start := time.Now()
-	response, err := http.Get(requestURL)
+	client := &http.Client{
+		Timeout: time.Duration(Timeout) * time.Second,
+	}
+	response, err := client.Get(requestURL)
 	if err != nil {
 		ch <- fmt.Sprintf("-\t-\t-\t#%d:%s: Error Fetchig URL :: %v", index, requestURL, err)
 		return
