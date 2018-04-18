@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"tempconv"
+	"the-go-programming-language/ch2/2.1/src/tempconv"
 )
 
 func main() {
