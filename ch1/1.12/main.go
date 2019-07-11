@@ -1,5 +1,5 @@
 /*
-1.12: Lissajous program to print green on black, 
+1.12: Lissajous program to print green on black,
 with the value for "cycles" parameter passed through the query param "cycles"
 */
 

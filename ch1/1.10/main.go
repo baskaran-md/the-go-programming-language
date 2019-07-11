@@ -57,17 +57,17 @@ func fetch(index int, requestURL string, ch chan<- string) {
 	file := "Result_" + strconv.Itoa(index) + "_" + u.Hostname()
 	f, err := os.Create(file)
 	if err != nil {
-		ch <- fmt.Sprintf("Error creating file: %v", file, err)
+		ch <- fmt.Sprintf("Error creating file %s: %v", file, err)
 		return
 	}
 	defer f.Close()
 
-	nbytes, err := io.Copy(f, response.Body)
+	nBytes, err := io.Copy(f, response.Body)
 	defer response.Body.Close()
 	if err != nil {
-		ch <- fmt.Sprintf("Error reading the response body: %v", requestURL, err)
+		ch <- fmt.Sprintf("Error reading the response body, %s: %v", requestURL, err)
 		return
 	}
-	xtime := time.Since(start).Seconds()
-	ch <- fmt.Sprintf("%.2f\t%d\t%s\t#%d:%s", xtime, nbytes, response.Status, index, requestURL)
+	xTime := time.Since(start).Seconds()
+	ch <- fmt.Sprintf("%.2f\t%d\t%s\t#%d:%s", xTime, nBytes, response.Status, index, requestURL)
 }

@@ -20,10 +20,8 @@ func main() {
 		}
 
 		fmt.Printf("URL: %s\n", url)
-		_, err = io.Copy(os.Stdout, response.Body)
-		defer response.Body.Close()
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error reading the response body: %v\n", url, err)
+		if _, err := io.Copy(os.Stdout, response.Body); err != nil {
+			fmt.Fprintf(os.Stderr, "Error reading the response body, %s: %v\n", url, err)
 			os.Exit(1)
 		}
 	}

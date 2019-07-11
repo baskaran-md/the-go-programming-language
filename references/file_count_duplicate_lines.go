@@ -1,6 +1,6 @@
 /*
 * Examples for file reading
-*/
+ */
 package main
 
 import (
@@ -14,7 +14,7 @@ import (
 /*
 * Method 1: Read the content of the file line by line
 * using bufio scanner till it reaches EOF
-*/
+ */
 func fileReadMethod1(fileList []string, count map[string]int) {
 
 	fmt.Printf("== FILE READ: METHOD 1 ==\n")
@@ -38,7 +38,7 @@ func fileReadMethod1(fileList []string, count map[string]int) {
 /*
 * Method 2: Read the entire content of the file in one gulp
 * and parsing them by using strings.Splint function
-*/
+ */
 func fileReadMethod2(fileList []string, count map[string]int) {
 
 	fmt.Printf("== FILE READ: METHOD 2 ==\n")
@@ -60,7 +60,7 @@ func fileReadMethod2(fileList []string, count map[string]int) {
 
 /*
 * Reset the counter map by deleting all existing keys
-*/
+ */
 func resetCount(count map[string]int) {
 	for key := range count {
 		delete(count, key)
@@ -69,7 +69,7 @@ func resetCount(count map[string]int) {
 
 /*
 * The Main function begins
-*/
+ */
 func main() {
 	fmt.Printf("Counting duplicate words:\n")
 

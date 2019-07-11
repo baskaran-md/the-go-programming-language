@@ -5,8 +5,11 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 )
+
+var out io.Writer = os.Stdout
 
 func main() {
 	fmt.Printf("Program: %v\n", os.Args[0])
@@ -14,7 +17,7 @@ func main() {
 	// Method#1
 	// Prints each argument along with its index (one per line)
 	for i := 1; i < len(os.Args); i++ {
-		fmt.Printf("Arg#%d: %s\n", i, os.Args[i])
+		fmt.Fprintf(out, "Arg#%d: %s\n", i, os.Args[i])
 	}
 
 	// Method#2
