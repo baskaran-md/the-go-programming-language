@@ -85,7 +85,6 @@ create_coverfile()
     if [[ -s "${COVER_REPORT_FILE}" ]]; then
         go tool cover -html="${COVER_REPORT_FILE}" -o "${COVER_HTML_REPORT_FILE}"
         echo "Report: ${COVER_HTML_REPORT_FILE}"
-        rm "${COVER_REPORT_FILE}"
     fi
 }
 
