@@ -8,7 +8,7 @@ TEST_SOURCE=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
 # shellcheck source=/dev/null
 source "${TEST_SOURCE}"/test_lib.sh || exit 1
 
-SRC=github.com/the-go-programming-language
+SRC=github.com/baskaran-md/the-go-programming-language
 
 echo ""
 echo "Cleanup old reports..."
