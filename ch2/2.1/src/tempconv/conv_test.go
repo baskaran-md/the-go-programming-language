@@ -1,6 +1,7 @@
 package tempconv
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -122,7 +123,7 @@ func TestKToC(t *testing.T) {
 	} {
 		t.Run(test.desc, func(t *testing.T) {
 			c := KToC(test.k)
-			if c != test.wantC {
+			if c != test.wantC || c.String() != fmt.Sprintf("%g*C", test.wantC) {
 				t.Fatalf("%s: got C %s, want %s", test.desc, c, test.wantC)
 			}
 		})
@@ -154,7 +155,7 @@ func TestKToF(t *testing.T) {
 	} {
 		t.Run(test.desc, func(t *testing.T) {
 			f := KToF(test.k)
-			if f != test.wantF {
+			if f != test.wantF || f.String() != fmt.Sprintf("%g*F", test.wantF) {
 				t.Fatalf("%s: got F %s, want %s", test.desc, f, test.wantF)
 			}
 		})
@@ -185,7 +186,7 @@ func TestFToK(t *testing.T) {
 	} {
 		t.Run(test.desc, func(t *testing.T) {
 			k := FToK(test.f)
-			if k != test.wantK {
+			if k != test.wantK || k.String() != fmt.Sprintf("%g*K", test.wantK) {
 				t.Fatalf("%s: got K %s, want %s", test.desc, k, test.wantK)
 			}
 		})
