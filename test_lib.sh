@@ -11,6 +11,8 @@ VET_RESULT_FILE=${TEST_RESULTS_DIR}/vet-results.txt
 LINT_RESULT_FILE=${TEST_RESULTS_DIR}/lint-results.txt
 FMT_RESULT_FILE=${TEST_RESULTS_DIR}/fmt-results.txt
 COVER_REPORT_FILE=${TEST_RESULTS_DIR}/coverage.txt
+COVER_REPORT_FILE_CC=${RUN_TEST_SOURCE}/c.out
+
 COVER_HTML_REPORT_FILE=${TEST_RESULTS_DIR}/coverage.html
 
 
@@ -85,6 +87,7 @@ create_coverfile()
     if [[ -s "${COVER_REPORT_FILE}" ]]; then
         go tool cover -html="${COVER_REPORT_FILE}" -o "${COVER_HTML_REPORT_FILE}"
         echo "Report: ${COVER_HTML_REPORT_FILE}"
+        cp ${COVER_REPORT_FILE} ${COVER_REPORT_FILE_CC}
     fi
 }
 
