@@ -55,6 +55,8 @@ vet_and_return_errors()
 
 lint_and_return_errors()
 {
+    go get -u golang.org/x/lint/golint
+
     if [ -z "$1" ] # if a relative package is not provided, default to ./...
     then
         LINT_CMD="golint ./..."
